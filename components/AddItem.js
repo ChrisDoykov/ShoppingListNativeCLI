@@ -27,6 +27,7 @@ const AddItem = ({style, itemsStore}) => {
     <View style={style}>
       <TextInput
         placeholder="Add item..."
+        placeholderTextColor="black"
         value={text}
         onChangeText={setText}
         style={styles.input}
@@ -38,7 +39,7 @@ const AddItem = ({style, itemsStore}) => {
         }}>
         <Text style={styles.btnText}>
           <Icon name="plus" size={20} />
-          Add Item
+          &nbsp; Add Item
         </Text>
       </TouchableOpacity>
     </View>
@@ -50,11 +51,15 @@ const styles = StyleSheet.create({
     height: 60,
     padding: 8,
     fontSize: 16,
+    color: 'black',
+    borderBottomWidth: 2,
+    marginHorizontal: 5,
   },
   btn: {
     backgroundColor: '#c2bad8',
     padding: 9,
     margin: 5,
+    marginBottom: 10,
   },
   btnText: {
     color: 'darkslateblue',

@@ -22,8 +22,11 @@ const ListItem = ({item, itemsStore}) => {
 const styles = StyleSheet.create({
   listItem: {
     padding: 15,
-    backgroundColor: 'white',
+    backgroundColor: '#EDE9E7',
     borderBottomWidth: 1,
+    marginHorizontal: 5,
+    // borderRadius: 10,
+    marginTop: 5,
     borderColor: 'grey',
   },
   listItemView: {

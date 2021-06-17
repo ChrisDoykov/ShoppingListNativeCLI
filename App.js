@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Provider itemsStore={new ItemsStore()}>
       <SafeAreaView style={styles.safeArea}>
-        <View>
+        <View style={styles.container}>
           <Header />
           <AddItem />
           <Items />
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 0,
+    backgroundColor: 'white',
   },
   containerLoading: {
     flex: 1,
