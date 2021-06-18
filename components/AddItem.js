@@ -26,7 +26,7 @@ const AddItem = ({style, itemsStore}) => {
   return (
     <View style={style}>
       <TextInput
-        placeholder="Add item..."
+        placeholder="Item name..."
         placeholderTextColor="black"
         value={text}
         onChangeText={setText}
@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   btn: {
-    backgroundColor: '#c2bad8',
+    backgroundColor: '#c5f8ff',
     padding: 9,
     margin: 5,
     marginBottom: 10,
   },
   btnText: {
-    color: 'darkslateblue',
+    color: '#00BCD4',
     fontSize: 20,
     textAlign: 'center',
   },

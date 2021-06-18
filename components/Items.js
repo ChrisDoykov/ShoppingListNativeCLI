@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, ActivityIndicator} from 'react-native';
+import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import ListItem from './ListItem';
 import {inject, observer} from 'mobx-react';
 
@@ -9,16 +9,27 @@ const Items = ({itemsStore}) => {
   }, []);
 
   let loading = itemsStore.loading;
-  return !loading ? (
-    <FlatList
-      data={itemsStore.items}
-      renderItem={({item}) => (
-        <ListItem item={item} itemsStore={itemsStore} key={item.id} />
+  return (
+    <View style={styles.container}>
+      {!loading ? (
+        <FlatList
+          data={itemsStore.items}
+          renderItem={({item}) => (
+            <ListItem item={item} itemsStore={itemsStore} key={item.id} />
+          )}
+        />
+      ) : (
+        <ActivityIndicator size="large" color="#00BCD4" />
       )}
-    />
-  ) : (
-    <ActivityIndicator size="large" color="#fafafa" />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+});
 
 export default inject(({itemsStore}) => ({itemsStore}))(observer(Items));

@@ -12,7 +12,7 @@ const ListItem = ({item, itemsStore}) => {
           name="remove"
           onPress={() => itemsStore.deleteItem(item.id)}
           size={20}
-          color={'firebrick'}
+          color={'#d62d2d'}
         />
       </View>
     </TouchableOpacity>
@@ -22,12 +22,11 @@ const ListItem = ({item, itemsStore}) => {
 const styles = StyleSheet.create({
   listItem: {
     padding: 15,
-    backgroundColor: '#EDE9E7',
+    backgroundColor: '#f3f0ef',
     borderBottomWidth: 1,
     marginHorizontal: 5,
-    // borderRadius: 10,
     marginTop: 5,
-    borderColor: 'grey',
+    borderColor: '#75eefe',
   },
   listItemView: {
     flexDirection: 'row',
