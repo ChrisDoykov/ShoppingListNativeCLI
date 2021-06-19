@@ -19,7 +19,7 @@ const App = () => {
             <Text style={styles.footNote}>
               Kristiyan Doykov{' '}
               <Icon style={styles.copyright} name={'copyright'} size={20} />{' '}
-              2021
+              {new Date().getFullYear()}
             </Text>
           </View>
         </View>
