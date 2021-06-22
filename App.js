@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView, Text} from 'react-native';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
 import Header from './components/Header';
 import AddItem from './components/AddItem';
 import {inject, observer, Provider} from 'mobx-react';
 import ItemsStore from './store';
 import Items from './components/Items';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -15,13 +15,7 @@ const App = () => {
           <Header />
           <AddItem />
           <Items />
-          <View>
-            <Text style={styles.footNote}>
-              Kristiyan Doykov{' '}
-              <Icon style={styles.copyright} name={'copyright'} size={20} />{' '}
-              {new Date().getFullYear()}
-            </Text>
-          </View>
+          <Footer />
         </View>
       </SafeAreaView>
     </Provider>
@@ -48,16 +42,6 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#272C36',
-  },
-  footNote: {
-    fontSize: 16,
-    textAlign: 'center',
-    borderBottomWidth: 5,
-    borderBottomColor: '#00BCD4',
-    paddingBottom: 13,
-  },
-  copyright: {
-    color: '#8C43FF',
   },
 });
 
