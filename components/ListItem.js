@@ -10,6 +10,7 @@ const ListItem = ({item, itemsStore}) => {
         <Text style={styles.listItemText}>{item.text}</Text>
         <Icon
           name="remove"
+          style={styles.icon}
           onPress={() => itemsStore.deleteItem(item.id)}
           size={20}
           color={'#d62d2d'}
@@ -22,6 +23,7 @@ const ListItem = ({item, itemsStore}) => {
 const styles = StyleSheet.create({
   listItem: {
     padding: 15,
+    paddingLeft: 10,
     backgroundColor: '#f3f0ef',
     borderBottomWidth: 1,
     marginHorizontal: 5,
@@ -35,6 +37,9 @@ const styles = StyleSheet.create({
   },
   listItemText: {
     fontSize: 18,
+  },
+  icon: {
+    padding: 5,
   },
 });
 

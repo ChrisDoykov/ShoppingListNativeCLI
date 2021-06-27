@@ -17,11 +17,11 @@
 //   };
 // };
 
-module.exports = function (api) {
-  api.cache(true);
+module.exports = {
+  // api.cache(true);
 
-  const presets =  ['module:metro-react-native-babel-preset'],
-  const plugins = [
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: [
     'react-require',
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
@@ -40,12 +40,6 @@ module.exports = function (api) {
     ],
 
     ['@babel/plugin-transform-runtime', {}],
-  ];
-
-
-   return {
-    presets,
-    plugins,
-    sourceMaps: true,
-  };
+  ],
+  sourceMaps: true,
 };
