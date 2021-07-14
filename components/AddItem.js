@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {inject} from 'mobx-react';
+import React, { useState } from 'react';
+import { inject } from 'mobx-react';
 
 import {
   View,
@@ -10,13 +10,14 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import strings from '../translations';
 
-const AddItem = ({style, itemsStore}) => {
+const AddItem = ({ style, itemsStore }) => {
   const [text, setText] = useState('');
 
   const addItem = async text => {
     if (!text) {
-      Alert.alert('Error', 'Please enter an item', [{text: 'Ok'}]);
+      Alert.alert('Error', strings.enterItem, [{ text: 'OK' }]);
     } else {
       itemsStore.addItem(text);
       setText('');
@@ -26,7 +27,7 @@ const AddItem = ({style, itemsStore}) => {
   return (
     <View style={style}>
       <TextInput
-        placeholder="Item name..."
+        placeholder={`${strings.itemName}...`}
         placeholderTextColor="black"
         value={text}
         onChangeText={setText}
@@ -39,7 +40,7 @@ const AddItem = ({style, itemsStore}) => {
         }}>
         <Text style={styles.btnText}>
           <Icon name="plus" size={20} />
-          &nbsp; Add Item
+          &nbsp; {strings.addItem}
         </Text>
       </TouchableOpacity>
     </View>
@@ -68,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject(({itemsStore}) => ({itemsStore}))(AddItem);
+export default inject(({ itemsStore }) => ({ itemsStore }))(AddItem);

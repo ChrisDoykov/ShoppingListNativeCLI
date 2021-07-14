@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-import {inject, observer} from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
-const ListItem = ({item, itemsStore}) => {
+const ListItem = ({ item, itemsStore }) => {
+
   return (
     <TouchableOpacity style={styles.listItem}>
       <View style={styles.listItemView}>
@@ -43,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject(({itemsStore}) => ({itemsStore}))(observer(ListItem));
+export default inject(({ itemsStore }) => ({ itemsStore }))(observer(ListItem));
