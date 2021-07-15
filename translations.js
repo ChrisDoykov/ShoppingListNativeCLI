@@ -17,7 +17,7 @@ const strings = new LocalizedStrings({
         itemName: 'Item name',
         addItem: 'Add Item',
         allForNow: "Looks like that's all for now :)",
-        cancel: 'Cancel',
+        cancel: 'Close',
         wentWrong: 'Something went wrong!',
         wrongPass: 'Wrong Password!',
         badEmail: 'Please enter a valid email address!',
