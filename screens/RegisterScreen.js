@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { inject, observer } from 'mobx-react';
 import strings from '../translations';
 
-const RegisterScreen = ({ navigation, usersStore }) => {
+const RegisterScreen = ({ navigation, usersStore, alertsStore }) => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,12 +16,33 @@ const RegisterScreen = ({ navigation, usersStore }) => {
 
     const onRegisterPress = async () => {
         if (password !== confirmPassword) {
-            alert(strings.passwordsDontMatch);
+            alertsStore.updateSettings({
+                title: strings.wentWrong,
+                message: strings.passwordsDontMatch,
+                showConfirmButton: false
+            });
+            alertsStore.showAlert();
             return;
         }
         const res = await usersStore.register(email, password, fullName);
 
-        if (!res.success) alert(res.error);
+        if (!res.success) {
+            let message;
+            if (res.error.message.includes('password is invalid')) {
+                message = strings.wrongPass;
+            } else if (res.error.message.includes('email address is badly formatted')) {
+                message = strings.badEmail;
+            } else {
+                message = strings.genericErr;
+            }
+
+            alertsStore.updateSettings({
+                title: strings.wentWrong,
+                message,
+                showConfirmButton: false
+            });
+            alertsStore.showAlert();
+        }
     };
 
     return (
@@ -149,6 +170,6 @@ const styles = StyleSheet.create({
 });
 
 
-export default inject(({ usersStore }) => ({ usersStore }))(
+export default inject(({ usersStore, alertsStore }) => ({ usersStore, alertsStore }))(
     observer(RegisterScreen),
 );

@@ -12,12 +12,17 @@ import {
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import strings from '../translations';
 
-const AddItem = ({ style, itemsStore }) => {
+const AddItem = ({ style, itemsStore, alertsStore }) => {
   const [text, setText] = useState('');
 
   const addItem = async text => {
     if (!text) {
-      Alert.alert('Error', strings.enterItem, [{ text: 'OK' }]);
+      alertsStore.updateSettings({
+        title: strings.wentWrong,
+        message: strings.enterItem,
+        showConfirmButton: false
+      });
+      alertsStore.showAlert();
     } else {
       itemsStore.addItem(text);
       setText('');
@@ -69,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject(({ itemsStore }) => ({ itemsStore }))(AddItem);
+export default inject(({ itemsStore, alertsStore }) => ({ itemsStore, alertsStore }))(AddItem);

@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { inject, observer } from 'mobx-react';
 import strings from '../translations';
 
-const LoginScreen = ({ navigation, usersStore }) => {
+const LoginScreen = ({ navigation, usersStore, alertsStore }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,7 +15,28 @@ const LoginScreen = ({ navigation, usersStore }) => {
     const onLoginPress = async () => {
         try {
             const res = await usersStore.login(email, password);
-            if (!res.success) alert(res.error);
+            if (!res.success) {
+                let message;
+                if (res.error.message.includes('password is invalid')) {
+                    message = strings.wrongPass;
+                } else if (res.error.message.includes('email address is badly formatted')) {
+                    message = strings.badEmail;
+                } else if (res.error.message.includes('no user record')) {
+                    message = strings.noSuchUser;
+                } else if (typeof res.error === 'string' && res.error.includes('Too many reqs')) {
+                    message = strings.tooManyReqs;
+                } else {
+                    message = strings.genericErr;
+                }
+
+                alertsStore.updateSettings({
+                    title: strings.wentWrong,
+                    message,
+                    showConfirmButton: false
+                });
+                alertsStore.showAlert();
+
+            }
         } catch (e) {
             console.log('LOGIN SCREEN TRY/CATCH ERROR: ', e);
         }
@@ -123,4 +144,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default inject(({ usersStore }) => ({ usersStore }))(observer(LoginScreen));
+export default inject(({ usersStore, alertsStore }) => ({ usersStore, alertsStore }))(observer(LoginScreen));

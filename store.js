@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import uuid from 'react-native-uuid';
+import strings from './translations';
 
 export class UsersStore {
   constructor() {
@@ -79,10 +80,14 @@ export class UsersStore {
       console.error(e);
 
       if (e.code.toString().includes('wrong-password')) {
-        alert('Wrong Password! Please try again.');
+        // alert('Wrong Password! Please try again.');
       }
       if (e.code.toString().includes('too-many-requests')) {
-        alert('Too many bad login attempts! Please try again later.');
+        // alert('Too many bad login attempts! Please try again later.');
+        return {
+          failed: true,
+          error: 'Too many reqs',
+        };
       }
 
       this.setLoadingAction(false);
@@ -221,4 +226,51 @@ export class ItemsStore {
       this.loading = loadingValue;
     });
   };
+}
+
+export class AlertsStore {
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  shown = false;
+  settings = {
+    showProgress: false,
+    title: "",
+    message: "",
+    closeOnTouchOutside: true,
+    closeOnHardwareBackPress: false,
+    showCancelButton: true,
+    showConfirmButton: true,
+    cancelText: strings.cancel,
+    confirmText: "OK",
+    confirmButtonColor: "#00BCD4",
+    onCancelPressed: () => {
+      this.hideAlert();
+    },
+    onConfirmPressed: () => {
+      this.hideAlert();
+    },
+  };
+
+  hideAlert = () => {
+    runInAction(() => {
+      this.shown = false;
+    });
+  };
+
+  showAlert = () => {
+    runInAction(() => {
+      this.shown = true;
+    });
+  };
+
+  updateSettings(settings) {
+    runInAction(() => {
+      this.settings = {
+        ...this.settings,
+        ...settings
+      };
+    });
+  }
 }

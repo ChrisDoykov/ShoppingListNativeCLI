@@ -7,14 +7,14 @@
  */
 
 import { Provider } from 'mobx-react';
-import { ItemsStore, UsersStore } from './store';
+import { ItemsStore, UsersStore, AlertsStore } from './store';
 import 'react-native-gesture-handler';
 import React from 'react';
 import App from './App';
 
 const AppContainer = () => {
     return (
-        <Provider itemsStore={new ItemsStore()} usersStore={new UsersStore()}>
+        <Provider alertsStore={new AlertsStore()} itemsStore={new ItemsStore()} usersStore={new UsersStore()}>
             <App />
         </Provider>
     );

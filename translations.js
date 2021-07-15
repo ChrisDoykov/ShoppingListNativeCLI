@@ -16,7 +16,14 @@ const strings = new LocalizedStrings({
         enterItem: 'Please enter an item.',
         itemName: 'Item name',
         addItem: 'Add Item',
-        allForNow: "Looks like that's all for now :)"
+        allForNow: "Looks like that's all for now :)",
+        cancel: 'Cancel',
+        wentWrong: 'Something went wrong!',
+        wrongPass: 'Wrong Password!',
+        badEmail: 'Please enter a valid email address!',
+        noSuchUser: 'No user with this email address exists!',
+        genericErr: 'Not sure what went wrong. Tell Kristiyan to fix it :)',
+        tooManyReqs: 'Too many bad requests, please try again later!'
     },
     bg: {
         email: 'Имейл',
@@ -33,7 +40,14 @@ const strings = new LocalizedStrings({
         enterItem: 'Моля въведете име на продукта.',
         itemName: 'Име на продукта',
         addItem: 'Добави продукт',
-        allForNow: "Нищо не сте забравили :)"
+        allForNow: "Нищо не сте забравили :)",
+        cancel: 'Затвори',
+        wentWrong: 'Нещо се обърка!',
+        wrongPass: 'Грешна парола!',
+        badEmail: 'Моля въведете правилно форматиран имейл!',
+        noSuchUser: 'Не съществува протребител с такъв имейл!',
+        genericErr: 'Нещо ново се обърка, кажете на Криската да го оправи :)',
+        tooManyReqs: 'Прекалено много грешни опити, моля опитайте по-късно!'
     }
 });
 

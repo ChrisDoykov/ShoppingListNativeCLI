@@ -8,6 +8,7 @@ import 'react-native-gesture-handler';
 import { decode, encode } from 'base-64';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -18,7 +19,7 @@ if (!global.atob) {
 
 const Stack = createStackNavigator();
 
-const App = ({ usersStore }) => {
+const App = ({ usersStore, alertsStore }) => {
 
   useEffect(() => {
     usersStore.onAuthStateChanged();
@@ -26,6 +27,9 @@ const App = ({ usersStore }) => {
 
   const user = usersStore.user;
   const loading = usersStore.loading;
+
+  const alertSettings = alertsStore.settings;
+  const alertShown = alertsStore.shown;
 
   return (
     loading ? (
@@ -56,6 +60,21 @@ const App = ({ usersStore }) => {
             )}
           </Stack.Navigator>
         </NavigationContainer>
+        <AwesomeAlert
+          show={alertShown}
+          showProgress={alertSettings.showProgress}
+          title={alertSettings.title}
+          message={alertSettings.message}
+          closeOnTouchOutside={alertSettings.closeOnTouchOutside}
+          closeOnHardwareBackPress={alertSettings.closeOnHardwareBackPress}
+          showCancelButton={alertSettings.showCancelButton}
+          showConfirmButton={alertSettings.showConfirmButton}
+          cancelText={alertSettings.cancelText}
+          confirmText={alertSettings.confirmText}
+          confirmButtonColor={alertSettings.confirmButtonColor}
+          onCancelPressed={alertSettings.onCancelPressed}
+          onConfirmPressed={alertSettings.onConfirmPressed}
+        />
       </SafeAreaView>
       ));
 };
@@ -79,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject(({ usersStore }) => ({ usersStore }))(observer(App));
+export default inject(({ usersStore, alertsStore }) => ({ usersStore, alertsStore }))(observer(App));
