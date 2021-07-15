@@ -191,15 +191,16 @@ export class ItemsStore {
 
   async addItem(text) {
     try {
+
+      runInAction(() => {
+        this.items = [...this.items, { text, id: uuid.v4() }];
+      });
+
       await firestore()
         .collection('ShoppingItems')
         .doc(this.userId).set({
           items: [...this.items.map(item => item.text), text]
         });
-
-      runInAction(() => {
-        this.items = [...this.items, { text, id: uuid.v4() }];
-      });
     } catch (e) {
       console.log(e);
     }
@@ -207,15 +208,15 @@ export class ItemsStore {
 
   async deleteItem(id) {
     try {
+      runInAction(() => {
+        this.items = [...this.items.filter(item => item.id !== id)];
+      });
+
       await firestore()
         .collection('ShoppingItems')
         .doc(this.userId).set({
           items: [...this.items.filter(item => item.id !== id).map(item => item.text)]
         });
-
-      runInAction(() => {
-        this.items = [...this.items.filter(item => item.id !== id)];
-      });
     } catch (e) {
       console.log(e);
     }
