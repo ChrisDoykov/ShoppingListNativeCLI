@@ -199,7 +199,7 @@ export class ItemsStore {
       await firestore()
         .collection('ShoppingItems')
         .doc(this.userId).set({
-          items: [...this.items.map(item => item.text), text]
+          items: [...this.items.map(item => item.text)]
         });
     } catch (e) {
       console.log(e);
@@ -215,7 +215,7 @@ export class ItemsStore {
       await firestore()
         .collection('ShoppingItems')
         .doc(this.userId).set({
-          items: [...this.items.filter(item => item.id !== id).map(item => item.text)]
+          items: [...this.items.map(item => item.text)]
         });
     } catch (e) {
       console.log(e);
