@@ -206,6 +206,25 @@ export class ItemsStore {
     }
   }
 
+  async updateItem(id, newText) {
+    try {
+      const itemsUpdated = this.items.map(item => {
+        return item.id === id ? ({ id: item.id, text: newText }) : item;
+      });
+      runInAction(() => {
+        this.items = [...itemsUpdated
+        ];
+      });
+      await firestore()
+        .collection('ShoppingItems')
+        .doc(this.userId).update({
+          items: [...this.items.map(item => item.text)]
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async deleteItem(id) {
     try {
       runInAction(() => {
